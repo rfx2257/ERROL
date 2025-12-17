@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>申紹廷 Errol - Cyberpunk Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0e27;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Animated Cyberpunk Background */
+        .cyber-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a0b2e 0%, #2d1b69 25%, #5b2a86 50%, #8b3a9f 75%, #1a0b2e 100%);
+            background-size: 400% 400%;
+            animation: cyberGradient 20s ease infinite;
+            z-index: -2;
+        }
+
+        @keyframes cyberGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Particle Canvas */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 5rem;
+            max-width: 1200px;
+            width: 100%;
+            animation: glitchIn 1.5s ease;
+        }
+
+        @keyframes glitchIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            20% {
+                transform: translateX(10px);
+            }
+            40% {
+                transform: translateX(-5px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #e0b3ff;
+            text-shadow: 
+                0 0 10px #b388ff,
+                0 0 20px #b388ff,
+                0 0 40px #7c4dff,
+                0 0 80px #7c4dff;
+            animation: neonPulse 2s ease-in-out infinite;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.1em;
+        }
+
+        @keyframes neonPulse {
+            0%, 100% {
+                text-shadow: 
+                    0 0 10px #b388ff,
+                    0 0 20px #b388ff,
+                    0 0 40px #7c4dff,
+                    0 0 80px #7c4dff;
+            }
+            50% {
+                text-shadow: 
+                    0 0 20px #b388ff,
+                    0 0 40px #b388ff,
+                    0 0 60px #7c4dff,
+                    0 0 100px #7c4dff,
+                    0 0 140px #651fff;
+            }
+        }
+
+        .hero-text h2 {
+            font-size: 2.5rem;
+            color: #fff;
+            font-weight: 300;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            color: #c5b3ff;
+            line-height: 1.8;
+            text-shadow: 0 0 5px rgba(197, 179, 255, 0.5);
+        }
+
+        .hero-avatar {
+            flex: 0 0 350px;
+        }
+
+        .avatar-circle {
+            width: 350px;
+            height: 350px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #b388ff 0%, #7c4dff 50%, #651fff 100%);
+            padding: 6px;
+            animation: avatarFloat 6s ease-in-out infinite, avatarGlow 3s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes avatarFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+
+        @keyframes avatarGlow {
+            0%, 100% {
+                box-shadow: 
+                    0 0 20px #b388ff,
+                    0 0 40px #7c4dff,
+                    0 0 60px #651fff;
+            }
+            50% {
+                box-shadow: 
+                    0 0 40px #b388ff,
+                    0 0 80px #7c4dff,
+                    0 0 120px #651fff,
+                    0 0 160px #4527a0;
+            }
+        }
+
+        .avatar-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1a0b2e, #2d1b69);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            font-weight: 900;
+            color: #e0b3ff;
+            text-shadow: 
+                0 0 20px #b388ff,
+                0 0 40px #7c4dff;
+            border: 2px solid rgba(179, 136, 255, 0.3);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3.5rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: #e0b3ff;
+            text-shadow: 
+                0 0 10px #b388ff,
+                0 0 20px #7c4dff,
+                0 0 40px #651fff;
+            letter-spacing: 0.1em;
+            animation: neonFlicker 4s ease-in-out infinite;
+        }
+
+        @keyframes neonFlicker {
+            0%, 100% { opacity: 1; }
+            41%, 43%, 45% { opacity: 0.7; }
+            42%, 44% { opacity: 1; }
+        }
+
+        /* About Section - Cyber Glass Cards */
+        .about-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .cyber-card {
+            background: rgba(179, 136, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border-radius: 15px;
+            padding: 2.5rem;
+            border: 2px solid rgba(179, 136, 255, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cyber-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(179, 136, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+
+        .cyber-card:hover::before {
+            left: 100%;
+        }
+
+        .cyber-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 
+                0 0 30px rgba(179, 136, 255, 0.6),
+                0 0 60px rgba(124, 77, 255, 0.4),
+                0 20px 40px rgba(101, 31, 255, 0.3);
+            border-color: #b388ff;
+            background: rgba(179, 136, 255, 0.1);
+        }
+
+        .cyber-card h3 {
+            font-size: 1.8rem;
+            color: #e0b3ff;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-shadow: 0 0 10px rgba(179, 136, 255, 0.8);
+        }
+
+        .cyber-card .icon {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 10px #b388ff);
+        }
+
+        .cyber-card p {
+            color: #c5b3ff;
+            line-height: 1.9;
+            font-size: 1.1rem;
+        }
+
+        /* Portfolio Section */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+        }
+
+        .portfolio-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+            background: linear-gradient(135deg, #1a0b2e, #2d1b69);
+            cursor: pointer;
+            transition: all 0.5s ease;
+            border: 2px solid rgba(179, 136, 255, 0.3);
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.08);
+            box-shadow: 
+                0 0 40px rgba(179, 136, 255, 0.8),
+                0 0 80px rgba(124, 77, 255, 0.6),
+                0 25px 50px rgba(101, 31, 255, 0.4);
+            border-color: #b388ff;
+        }
+
+        .portfolio-placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 5rem;
+            filter: drop-shadow(0 0 20px #b388ff);
+            transition: all 0.4s ease;
+        }
+
+        .portfolio-item:hover .portfolio-placeholder {
+            transform: translate(-50%, -50%) scale(1.2);
+            filter: drop-shadow(0 0 40px #7c4dff);
+        }
+
+        .portfolio-title {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(26, 11, 46, 0.95), transparent);
+            text-align: center;
+        }
+
+        .portfolio-title h3 {
+            font-size: 1.6rem;
+            color: #e0b3ff;
+            text-shadow: 0 0 10px #b388ff;
+        }
+
+        /* Portfolio Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: rgba(179, 136, 255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(179, 136, 255, 0.4);
+            border-radius: 20px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            animation: modalSlide 0.4s ease;
+            box-shadow: 
+                0 0 40px rgba(179, 136, 255, 0.6),
+                0 0 80px rgba(124, 77, 255, 0.4);
+        }
+
+        @keyframes modalSlide {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            color: #e0b3ff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-shadow: 0 0 10px #b388ff;
+        }
+
+        .modal-close:hover {
+            transform: scale(1.2) rotate(90deg);
+            color: #fff;
+            text-shadow: 0 0 20px #b388ff;
+        }
+
+        .modal-content h2 {
+            color: #e0b3ff;
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 15px #b388ff;
+        }
+
+        .modal-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(179, 136, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(179, 136, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: rgba(179, 136, 255, 0.1);
+            border-color: #b388ff;
+            transform: translateX(10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            filter: drop-shadow(0 0 10px #b388ff);
+        }
+
+        .feature-text {
+            color: #c5b3ff;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column-reverse;
+                gap: 3rem;
+            }
+
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .hero-text h2 {
+                font-size: 1.8rem;
+            }
+
+            .hero-avatar {
+                flex: 0 0 250px;
+            }
+
+            .avatar-circle {
+                width: 250px;
+                height: 250px;
+            }
+
+            .avatar-inner {
+                font-size: 5rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                padding: 2rem;
+            }
+        }
+
+        /* Glitch Effect on Hover */
+        .glitch {
+            position: relative;
+        }
+
+        .glitch:hover::before,
+        .glitch:hover::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch:hover::before {
+            animation: glitch1 0.3s infinite;
+            color: #ff00ff;
+            z-index: -1;
+        }
+
+        .glitch:hover::after {
+            animation: glitch2 0.3s infinite;
+            color: #00ffff;
+            z-index: -2;
+        }
+
+        @keyframes glitch1 {
+            0%, 100% { transform: translate(0); }
+            33% { transform: translate(-2px, 2px); }
+            66% { transform: translate(2px, -2px); }
+        }
+
+        @keyframes glitch2 {
+            0%, 100% { transform: translate(0); }
+            33% { transform: translate(2px, -2px); }
+            66% { transform: translate(-2px, 2px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="cyber-bg"></div>
+    <canvas id="particles"></canvas>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="glitch" data-text="申紹廷">申紹廷</h1>
+                <h2>Errol</h2>
+                <p>// 探索數位邊界的賽博創作者<br>// Cyberpunk Developer & Digital Artist</p>
+            </div>
+            <div class="hero-avatar">
+                <div class="avatar-circle">
+                    <div class="avatar-inner">E</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section>
+        <h2 class="section-title">// ABOUT_ME</h2>
+        <div class="about-cards">
+            <div class="cyber-card">
+                <h3><span class="icon">🎓</span> 進德國小</h3>
+                <p>在進德國小建立了扎實的基礎教育，培養了對知識的渴望與探索精神，為未來的科技之路奠定基石。</p>
+            </div>
+            <div class="cyber-card">
+                <h3><span class="icon">📚</span> 雙十國中</h3>
+                <p>在雙十國中期間，首次接觸程式設計與數位創作，開啟了通往賽博世界的大門，從此深陷於代碼的魅力之中。</p>
+            </div>
+            <div class="cyber-card">
+                <h3><span class="icon">💻</span> 大甲高工資訊科</h3>
+                <p>目前就讀於大甲高工資訊科，持續精進技術能力，探索前沿科技，朝著成為頂尖開發者的目標前進。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section>
+        <h2 class="section-title">// PROJECTS</h2>
+        <div class="portfolio-grid">
+            <div class="portfolio-item" onclick="openModal('project1')">
+                <div class="portfolio-placeholder">🌐</div>
+                <div class="portfolio-title">
+                    <h3>Cyber Web Design</h3>
+                </div>
+            </div>
+            <div class="portfolio-item" onclick="openModal('project2')">
+                <div class="portfolio-placeholder">⚙️</div>
+                <div class="portfolio-title">
+                    <h3>Neural System Dev</h3>
+                </div>
+            </div>
+            <div class="portfolio-item" onclick="openModal('project3')">
+                <div class="portfolio-placeholder">📱</div>
+                <div class="portfolio-title">
+                    <h3>Quantum App</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal1')">✕</span>
+            <h2>Cyber Web Design</h2>
+            <div class="modal-features">
+                <div class="feature-item">
+                    <div class="feature-icon">🎨</div>
+                    <div class="feature-text">創新的賽博龐克視覺設計，融合霓虹美學與現代UI元素</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-text">高性能響應式架構，確保各裝置完美呈現與流暢體驗</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔮</div>
+                    <div class="feature-text">沉浸式互動特效，打造令人難忘的使用者旅程</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal2')">✕</span>
+            <h2>Neural System Dev</h2>
+            <div class="modal-features">
+                <div class="feature-item">
+                    <div class="feature-icon">🧠</div>
+                    <div class="feature-text">智能化後端架構設計，採用最新的分散式系統技術</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-text">企業級安全防護機制，保障數據完整性與隱私安全</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-text">即時數據處理與分析，提供精準的商業洞察決策</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal3')">✕</span>
+            <h2>Quantum App</h2>
+            <div class="modal-features">
+                <div class="feature-item">
+                    <div class="feature-icon">🚀</div>
+                    <div class="feature-text">跨平台無縫整合，一次開發多端部署的高效方案</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✨</div>
+                    <div class="feature-text">直覺化操作介面，結合AI智能助手提升使用效率</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🌟</div>
+                    <div class="feature-text">雲端同步技術，隨時隨地存取您的數位資產</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Particle System
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 80;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.size = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(179, 136, 255, ${Math.random() * 0.5 + 0.3})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function connectParticles() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 120) {
+                        ctx.strokeStyle = `rgba(124, 77, 255, ${0.2 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 1;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+
+            connectParticles();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Modal Functions
+        function openModal(projectId) {
+            const modal = document.getElementById('modal' + projectId.slice(-1));
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal(modal.id);
+                }
+            });
+        });
+
+        // Close modal with ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal.active').forEach(modal => {
+                    closeModal(modal.id);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
